@@ -1,6 +1,10 @@
 import React, { Component, useState } from "react";
 import '../styles/App.css';
 
+
+
+
+
 class App extends Component {
     constructor(props) {
         super(props)
@@ -13,8 +17,11 @@ class App extends Component {
         this.buttonClickHandler = this.buttonClickHandler.bind(this)
     };
 
+
     buttonClickHandler() {
    
+        this.setState({...this.state,renderBall:true})
+    
    }
     renderBallOrButton() {
 		if (this.state.renderBall) {
@@ -25,9 +32,19 @@ class App extends Component {
     }
 
     // bind ArrowRight keydown event
+
     componentDidMount() {
-      
+        document.addEventListener('keydown',(e)=>{
+            if (e.key === 'ArrowRight' || e.keyCode === 39) {
+                this.setState(prevState => ({
+                    ballPosition: {
+                        left: parseInt(prevState.ballPosition.left, 10) + 5 + 'px'
+                    }
+                }));
+            }
+        })
     }
+
 
     render() {
         return (
